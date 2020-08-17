@@ -1,0 +1,12 @@
+6b7cddcabc3a06245e10b5b50acda94f *DESCRIPTION
+b5b2e20c75457107297b566908b8c29d *NAMESPACE
+d0c8b7c198f0fe555885e1fd44342416 *R/data.R
+67497057436edc89b05fd0042c917ff4 *data/elcons_15min.rda
+ad6c99a0acf1fa44b301edf9d0ca3371 *data/heatinginfo_15min.rda
+64559aa42c7b9c4f2d8e177635a9113d *data/solarcadaster_features.rda
+e669371a1f699af1505ea238ce50f767 *data/weather_data.rda
+4fb942761b07194e1d1d9134b8c97116 *inst/CITATION
+c29ecf3e1d082df97d479e35bbcb990d *man/elcons_15min.Rd
+4c1b0ee93bc6b84c8fd7447124b4f199 *man/heatinginfo_15min.Rd
+4c88383578b474ad727bf5c7f711d2de *man/solarcadaster_features.Rd
+7dc08e540c91a0e66101dae465dec109 *man/weather_data.Rd
