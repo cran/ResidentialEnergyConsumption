@@ -27,7 +27,11 @@ heatinginfo_15min
 }
 \description{
 Ground truth data on housing type and heating information for the 15-minute 
-smart meter dataset *elcons_15min*. The data was collectes from customers 
+smart meter dataset *elcons_15min*. The data was collected from customers 
 of an electric utility company in Switzerland with a survey in 2018.
+}
+\details{
+Not all study participants answered the survey, thus, several rows of the table 
+contain only *NA* values.
 }
 \keyword{datasets}

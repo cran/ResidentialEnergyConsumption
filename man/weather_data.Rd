@@ -8,6 +8,8 @@
 A data frame with the following of variables: 
 
 \describe{
+\item{\code{DATE_CET}}{The date and time of the weather observation in Central European Time}
+\item{\code{WEEK}}{Week of the year as decimal number (00–53) using Monday as the first day of week}
 \item{\code{WIND_DIRECTION}}{Wind direction in compass degrees.
   *NA* when air is calm (no wind speed)}
 \item{\code{CLOUD_CEILING}}{Lowest opaque layer with 5/8 or greater
@@ -18,13 +20,9 @@ A data frame with the following of variables:
 \item{\code{TEMP}}{Temperature measured in fahrenheit}
 \item{\code{SEA_LEVEL_PRESSURE}}{Sea level pressure measured in millibars (rounded to nearest tenth)}
 \item{\code{STATION_PRESSURE}}{Station pressure measured in millibars (rounded to nearest tenth)}
-\item{\code{MAXIMUM_TEMPERATURE}}{Maximum temperature measured in fahrenheit}
-\item{\code{MINIMUM_TEMPERATURE}}{Minimum temperature measured in fahrenheit}
 \item{\code{PCP01}}{1-hour liquid precip reportin inches and hundredths,
   that is, the precip for the preceding 1-hour period}
-\item{\code{SNOW_DEPTH}}{Snow depth in inches}
 \item{\code{WIND_SPEED}}{Wind speed in miles per hour}
-\item{\code{DEW_POINT}}{Dew point measured in fahrenheit}
 }
 }
 \usage{
@@ -32,12 +30,27 @@ weather_data
 }
 \description{
 Weather data from a weather station in a central location of the study region. The
-data contains hourly measurements over a period of ten weeks, similar to the timespan of the dataset *elcons_15min*.
+data contains hourly measurements over a period of ten weeks, similar to the time span 
+of the dataset *elcons_15min*. Weather data are averaged across all available weather 
+stations in the study area for each unit of time.
 }
 \details{
 This data cannot be used or redistributed for commercial purposes. Re-distribution 
 of these data by others must provide this same notification. 
 (see \url{https://www.ncdc.noaa.gov/})
+}
+\examples{
+data(elcons_15min, weather_data)
+
+#transform 15-minute electricity measurements to hourly consumption values
+hourly_cons <- colSums(matrix(t(elcons_15min$w44[1,2:673]), nrow=4))
+
+#select temperature observations for week 44
+hourly_temp <- weather_data[weather_data$WEEK==44,"TEMP"]
+
+#compute correlation
+cor(hourly_cons, hourly_temp)
+
 }
 \references{
 NOAA National Centers for Environmental Information (2020)

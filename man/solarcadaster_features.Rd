@@ -42,11 +42,11 @@ A data frame with the following of variables:
 solarcadaster_features
 }
 \description{
-Data contains information about floor and roof spaces, as well
-as the energy demand for each individual household. For each household in *elcons_15min*, 
-at least five nearest neighbors are available in this dataset. When there are more than
-five nearest neighbors, there are at least two core addresses from which the distances
-were calculated (e.g. 2 adresses means 10 nearest neighbors).
+Data contains information about floor and roof spaces, as well as the energy demand for 
+each individual household. For each household in *elcons_15min*, at least five nearest 
+neighbors are available in this dataset. When there are more than five nearest neighbors, 
+there are at least two core addresses from which the distances were calculated (e.g., 
+2 adresses means 10 nearest neighbors).
 }
 \references{
 Klauser, Daniel (2016). Solarpotentialanalyse für Sonnendach.ch -

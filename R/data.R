@@ -20,8 +20,11 @@ NULL
 #' Heating info for 15-min smart meter data.
 #'
 #' Ground truth data on housing type and heating information for the 15-minute 
-#' smart meter dataset *elcons_15min*. The data was collectes from customers 
-#' of an electric utility company in Switzerland with a survey in 2018.
+#' smart meter dataset *elcons_15min*. The data was collected from customers 
+#' of an electric utility company in Switzerland with a survey in 2018. 
+#' 
+#' Not all study participants answered the survey, thus, several rows of the table 
+#' contain only *NA* values. 
 #'
 #' @format A data frame with the following of variables: 
 #' 
@@ -44,11 +47,11 @@ NULL
 
 #' Solarcadaster features for individual households.
 #'
-#' Data contains information about floor and roof spaces, as well
-#' as the energy demand for each individual household. For each household in *elcons_15min*, 
-#' at least five nearest neighbors are available in this dataset. When there are more than
-#' five nearest neighbors, there are at least two core addresses from which the distances
-#' were calculated (e.g. 2 adresses means 10 nearest neighbors).
+#' Data contains information about floor and roof spaces, as well as the energy demand for 
+#' each individual household. For each household in *elcons_15min*, at least five nearest 
+#' neighbors are available in this dataset. When there are more than five nearest neighbors, 
+#' there are at least two core addresses from which the distances were calculated (e.g., 
+#' 2 adresses means 10 nearest neighbors).
 #' 
 #' @references Klauser, Daniel (2016). Solarpotentialanalyse für Sonnendach.ch -
 #'   Schlussbericht. Bundesamt für Energie BFE, Schweiz.
@@ -92,7 +95,9 @@ NULL
 #' Weather data from one measuring station.
 #'
 #' Weather data from a weather station in a central location of the study region. The
-#' data contains hourly measurements over a period of ten weeks, similar to the timespan of the dataset *elcons_15min*.
+#' data contains hourly measurements over a period of ten weeks, similar to the time span 
+#' of the dataset *elcons_15min*. Weather data are averaged across all available weather 
+#' stations in the study area for each unit of time.
 #' 
 #' This data cannot be used or redistributed for commercial purposes. Re-distribution 
 #' of these data by others must provide this same notification. 
@@ -104,6 +109,8 @@ NULL
 #' @format A data frame with the following of variables: 
 #' 
 #' \describe{
+#' \item{\code{DATE_CET}}{The date and time of the weather observation in Central European Time}
+#' \item{\code{WEEK}}{Week of the year as decimal number (00–53) using Monday as the first day of week}
 #' \item{\code{WIND_DIRECTION}}{Wind direction in compass degrees.
 #'   *NA* when air is calm (no wind speed)}
 #' \item{\code{CLOUD_CEILING}}{Lowest opaque layer with 5/8 or greater
@@ -114,13 +121,21 @@ NULL
 #' \item{\code{TEMP}}{Temperature measured in fahrenheit}
 #' \item{\code{SEA_LEVEL_PRESSURE}}{Sea level pressure measured in millibars (rounded to nearest tenth)}
 #' \item{\code{STATION_PRESSURE}}{Station pressure measured in millibars (rounded to nearest tenth)}
-#' \item{\code{MAXIMUM_TEMPERATURE}}{Maximum temperature measured in fahrenheit}
-#' \item{\code{MINIMUM_TEMPERATURE}}{Minimum temperature measured in fahrenheit}
 #' \item{\code{PCP01}}{1-hour liquid precip reportin inches and hundredths,
 #'   that is, the precip for the preceding 1-hour period}
-#' \item{\code{SNOW_DEPTH}}{Snow depth in inches}
 #' \item{\code{WIND_SPEED}}{Wind speed in miles per hour}
-#' \item{\code{DEW_POINT}}{Dew point measured in fahrenheit}
 #' }
+#' 
+#' @examples 
+#' data(elcons_15min, weather_data)
+#' 
+#' #transform 15-minute electricity measurements to hourly consumption values
+#' hourly_cons <- colSums(matrix(t(elcons_15min$w44[1,2:673]), nrow=4))
+#' 
+#' #select temperature observations for week 44
+#' hourly_temp <- weather_data[weather_data$WEEK==44,"TEMP"]
+#' 
+#' #compute correlation
+#' cor(hourly_cons, hourly_temp)
 #' 
 "weather_data"
